@@ -150,28 +150,19 @@ function renderCombos(){
     card.className = `combo-card ${combo.tier}`;
     card.innerHTML = `<div class="combo-accent-bar"></div>`;
 
-    /* image */
-    const iw = document.createElement("div");
-    iw.className = "combo-img-wrap";
-    const img = document.createElement("img");
-    img.src = combo.img;
-    img.alt = combo.name; img.loading="lazy";
-    iw.addEventListener("click",()=>openImg(img.src));
-    iw.appendChild(img);
-    if(combo.badge){
-      const b=document.createElement("span");
-      b.className=`badge ${combo.badge.cls}`;
-      b.textContent=combo.badge.text;
-      iw.appendChild(b);
-    }
-    card.appendChild(iw);
-
     /* body */
     const body = document.createElement("div");
     body.className="combo-body";
 
     const nm = document.createElement("div");
     nm.className="combo-name"; nm.textContent=combo.name;
+    if(combo.badge){
+      const b=document.createElement("span");
+      b.className=`badge ${combo.badge.cls}`;
+      b.textContent=combo.badge.text;
+      b.style.marginLeft="8px";
+      nm.appendChild(b);
+    }
 
     const ds = document.createElement("div");
     ds.className="combo-desc"; ds.textContent=combo.desc;
