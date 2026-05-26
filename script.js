@@ -154,9 +154,8 @@ function renderCombos(){
     const iw = document.createElement("div");
     iw.className = "combo-img-wrap";
     const img = document.createElement("img");
-    img.src = combo.img||ph(combo.name);
+    img.src = combo.img;
     img.alt = combo.name; img.loading="lazy";
-    img.onerror=()=>{ img.src=ph(combo.name); };
     iw.addEventListener("click",()=>openImg(img.src));
     iw.appendChild(img);
     if(combo.badge){
