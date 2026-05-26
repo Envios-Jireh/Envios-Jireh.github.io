@@ -16,6 +16,7 @@ const PRODUCTS = [
   /* PROTEÍNAS */
   { id:8,  cat:"proteinas", name:"Pollo 10lb",               cost:9.40,  price:12.22,  img:"Images/Pollo.png" },
   { id:9,  cat:"proteinas", name:"Filin de huevo",           cost:6.00,  price:7.80,   img:"Images/Huevos.png" },
+  { id:10, cat:"otros",     name:"Helado de Chocolate",      cost:7.70,  price:10.00,  img:"Images/Helado.jpg" },
   /* HIGIENE */
   { id:11, cat:"higiene",   name:"Detergente líquido",       cost:1.60,  price:2.08,   img:"Images/Detergente.png" },
   { id:12, cat:"higiene",   name:"Jabón de baño 100gr",      cost:0.40,  price:0.52,   img:"Images/Jabonl.png" },
@@ -28,7 +29,6 @@ const PRODUCTS = [
   { id:18, cat:"bebidas",   name:"Cerveza Luxus",            cost:0.63,  price:0.819,  img:"Images/Luxus.png" },
   /* OTROS */
   { id:19, cat:"otros",     name:"Café Serrano",             cost:3.45,  price:4.485,  img:"Images/Cafe.png" },
-  { id:10, cat:"otros",     name:"Helado de Chocolate",      cost:7.70,  price:10.00,  img:"Images/Helado.jpg" },
 ];
 
 const CATEGORIES = [
