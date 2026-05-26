@@ -174,7 +174,7 @@ function renderCombos(){
     /* products gallery */
     const gallery = document.createElement("div");
     gallery.className = "combo-gallery";
-    const uniqueItems = Array.from(new Map(combo.items.map(it=>[it.id,it])).values()).slice(0,6);
+    const uniqueItems = Array.from(new Map(combo.items.map(it=>[it.id,it])).values());
     uniqueItems.forEach(it=>{
       const prod = PRODUCTS[it.id];
       const imgDiv = document.createElement("div");
