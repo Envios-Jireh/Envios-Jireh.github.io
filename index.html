@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Envíos Jireh | Combos y Productos a Cuba desde USA</title>
+<meta name="description" content="Envía combos y productos a Cuba desde Estados Unidos con Envíos Jireh. Alimentos, higiene, bebidas y más. Pago por Zelle. Entrega a domicilio en Cuba. ¡Mínimo $50 USD incluye envío!">
+<meta name="keywords" content="envios a cuba, combos cuba, paquetes cuba, enviar comida cuba, remesas cuba, envios jireh, pollo cuba, arroz cuba, frijoles cuba">
+<meta name="author" content="Envíos Jireh">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1a5c38">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Envíos Jireh | Combos a Cuba desde USA">
+<meta property="og:description" content="Envía combos completos o arma tu pedido personalizado a Cuba. Alimentos, higiene y más. Pago por Zelle. Envío incluido desde $50 USD.">
+<meta property="og:image" content="Images/ComboBasico.png">
+<meta property="og:locale" content="es_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Envíos Jireh | Combos a Cuba">
+<meta name="twitter:description" content="Envía combos completos o arma tu pedido a Cuba. Pago por Zelle. Envío incluido desde $50 USD.">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "Envíos Jireh",
+  "description": "Servicio de envíos de combos y productos a Cuba desde Estados Unidos",
+  "telephone": "+53-5672-6907",
+  "paymentAccepted": "Zelle",
+  "currenciesAccepted": "USD",
+  "areaServed": "Cuba",
+  "priceRange": "$$"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Cargar estilos separados -->
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="brand">
+    <h1 class="brand-name">Envíos Jireh</h1>
+    <p class="brand-sub">💛 Tu cariño, directo al corazón de Cuba</p>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="infoBtn" title="Cómo funciona" aria-label="Cómo funciona">ⓘ</button>
+  </div>
+</header>
+<div class="header-divider"></div>
+
+<!-- STICKY CART -->
+<div class="cart-bar">
+  <div class="cart-inner">
+    <div class="cart-row1">
+      <span class="cart-label">Total</span>
+      <span class="cart-total hidden-total" id="totalSpan">$ —</span>
+      <div class="cart-progress-wrap">
+        <div class="progress-rail"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="cart-status" id="statusMsg">Agrega productos para comenzar</div>
+      </div>
+    </div>
+    <div class="breakdown-strip" id="breakdownStrip">
+      <span class="bd-empty">Sin productos — elige un combo o agrega individualmente</span>
+    </div>
+    <div class="cart-actions">
+      <button class="btn btn-ghost btn-danger" id="resetBtn">🗑 Reiniciar</button>
+      <button class="btn btn-ghost" id="summaryBtn">📋 Mi combo</button>
+      <button class="btn btn-primary" id="orderBtn" disabled>📲 Formalizar pedido</button>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<nav class="tabs-container" role="tablist" aria-label="Secciones">
+  <div class="tabs-segment">
+    <button class="tab-btn active" id="tab-combos" role="tab" aria-selected="true" aria-controls="panel-combos">
+      <span class="tab-pill"></span>
+      🎁 Combos listos
+      <span class="tab-count" id="tc-combos">3</span>
+    </button>
+    <button class="tab-btn" id="tab-productos" role="tab" aria-selected="false" aria-controls="panel-productos">
+      <span class="tab-pill"></span>
+      🛒 Productos
+      <span class="tab-count" id="tc-productos">20</span>
+    </button>
+  </div>
+</nav>
+
+<!-- PANEL: COMBOS -->
+<div class="tab-panel active" id="panel-combos" role="tabpanel" aria-labelledby="tab-combos">
+  <h2 class="section-heading">🎁 Combos listos para enviar</h2>
+  <div class="combos-grid" id="combosGrid"></div>
+</div>
+
+<!-- PANEL: PRODUCTOS -->
+<div class="tab-panel" id="panel-productos" role="tabpanel" aria-labelledby="tab-productos">
+  <h2 class="section-heading">🛒 Arma tu pedido a la medida</h2>
+
+  <!-- Category filter -->
+  <div class="cat-filter-bar" id="catFilterBar"></div>
+
+  <!-- Products by category -->
+  <div id="productsCategorized"></div>
+</div>
+
+<footer>
+  <strong>Envíos Jireh</strong> — Calidad que nutre, ahorro que se siente ✨<br>
+  WhatsApp: <a href="https://wa.me/5356726907" style="color:var(--gold);text-decoration:none;">+53 5672 6907</a> &nbsp;|&nbsp; Tel: 51196751 &nbsp;|&nbsp; Pago por Zelle
+</footer>
+</div>
+
+<!-- ════════════════ MODALS ════════════════ -->
+
+<!-- WELCOME -->
+<div class="modal open" id="welcomeModal" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+  <div class="modal-box wide">
+    <div class="modal-title" id="welcomeTitle">📦 ¡Bienvenido a Envíos Jireh!</div>
+    <div class="welcome-step"><div class="step-icon">1️⃣</div><div class="step-text"><strong>Elige un combo listo</strong> — ve a la pestaña <em>🎁 Combos listos</em> y toca <em>"➕ Agregar al combo"</em>. Puedes combinar varios.</div></div>
+    <div class="welcome-step"><div class="step-icon">2️⃣</div><div class="step-text"><strong>O arma tu pedido</strong> — en <em>🛒 Productos</em> usa <strong>+</strong> y <strong>−</strong> para ajustar cantidades por categoría.</div></div>
+    <div class="welcome-step"><div class="step-icon">3️⃣</div><div class="step-text"><strong>El total aparece arriba.</strong> La barra avanza hasta el mínimo de <strong>$50 USD</strong> (envío incluido).</div></div>
+    <div class="welcome-step"><div class="step-icon">4️⃣</div><div class="step-text">Al superar $50, toca <em>"📲 Formalizar pedido"</em>, llena los datos y <strong>WhatsApp</strong> recibe el resumen completo.</div></div>
+    <div class="welcome-step"><div class="step-icon">💵</div><div class="step-text">Pago seguro por <strong>Zelle</strong>. Dudas: WhatsApp <strong>+53 5672 6907</strong> | Tel. 51196751</div></div>
+    <div class="modal-actions">
+      <button class="btn btn-green" id="closeWelcomeBtn">👉 Comenzar</button>
+    </div>
+  </div>
+</div>
+
+<!-- INFO -->
+<div class="modal" id="infoModal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-title">ℹ️ Cómo funciona</div>
+    <div class="modal-text">
+      <p>🎁 Los <strong>combos</strong> se suman a tu carrito — puedes combinar varios.</p>
+      <p>📊 El <strong>desglose</strong> de selección es visible en la barra superior siempre.</p>
+      <p>💰 El pedido mínimo es de <strong>$50 USD</strong>, envío incluido.</p>
+      <p>📲 Al formalizar, WhatsApp recibe el resumen completo del pedido.</p>
+      <p>🔹 Pagos seguros por <strong>Zelle</strong>.</p>
+    </div>
+    <div class="modal-actions"><button class="btn btn-muted" id="closeInfoBtn">Entendido</button></div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="modal" id="summaryModal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-title">📦 Mi combo actual</div>
+    <div class="summary-list" id="summaryList"></div>
+    <div id="summaryTotalBlock"></div>
+    <div class="modal-actions"><button class="btn btn-muted" id="closeSummaryBtn">Cerrar</button></div>
+  </div>
+</div>
+
+<!-- RECIPIENT -->
+<div class="modal" id="recipientModal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-title">✍️ Datos del destinatario en Cuba</div>
+    <p style="font-size:.82rem;color:var(--brown-soft);margin-bottom:1.1rem;line-height:1.55;">Completa estos datos para que podamos entregar el pedido correctamente.</p>
+    <label class="input-label" for="destNombre">👤 Nombre completo</label>
+    <input class="modal-input" type="text" id="destNombre" placeholder="Ej: María González Pérez" autocomplete="name">
+    <label class="input-label" for="destDireccion">🏠 Dirección en Cuba</label>
+    <input class="modal-input" type="text" id="destDireccion" placeholder="Ej: Calle 23 #456, Vedado, La Habana">
+    <p style="font-size:.7rem;color:var(--brown-muted);margin-top:-10px;margin-bottom:.8rem;">Incluye provincia, municipio, calle y número.</p>
+    <label class="input-label" for="destTelefono">📱 Teléfono en Cuba</label>
+    <input class="modal-input" type="tel" id="destTelefono" placeholder="Ej: 52345678">
+    <div class="modal-actions">
+      <button class="btn btn-green" id="confirmOrderBtn">✅ Enviar por WhatsApp</button>
+      <button class="btn btn-muted" id="closeRecipientBtn">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMAGE -->
+<div class="modal" id="imageModal" role="dialog" aria-modal="true" aria-label="Vista de imagen">
+  <div class="modal-box img-modal-box">
+    <img id="largeImg" src="" alt="Vista ampliada">
+    <div><button class="img-close-btn" id="closeImageBtn">Cerrar</button></div>
+  </div>
+</div>
+
+<!-- Cargar datos de productos (PRODUCTOS, COMBOS, CATEGORÍAS, etc) -->
+<script src="data/products.js"></script>
+
+<!-- Cargar lógica principal -->
+<script src="script.js"></script>
+
+</body>
+</html>
