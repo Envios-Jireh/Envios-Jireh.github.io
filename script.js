@@ -181,6 +181,28 @@ function renderCombos(){
     pr.className="combo-price";
     pr.innerHTML=`$${comboPrice(combo)} <small>USD (incl. envío)</small>`;
 
+    /* products gallery */
+    const gallery = document.createElement("div");
+    gallery.className = "combo-gallery";
+    const uniqueItems = Array.from(new Map(combo.items.map(it=>[it.id,it])).values()).slice(0,6);
+    uniqueItems.forEach(it=>{
+      const prod = PRODUCTS[it.id];
+      const imgDiv = document.createElement("div");
+      imgDiv.className = "combo-gallery-item";
+      imgDiv.title = `${prod.name} (${it.qty} u.)`;
+      const thumbImg = document.createElement("img");
+      thumbImg.src = prod.img || ph(prod.name);
+      thumbImg.alt = prod.name;
+      thumbImg.loading = "lazy";
+      thumbImg.onerror = ()=>{ thumbImg.src = ph(prod.name); };
+      imgDiv.appendChild(thumbImg);
+      const qty = document.createElement("span");
+      qty.className = "combo-gallery-qty";
+      qty.textContent = `×${it.qty}`;
+      imgDiv.appendChild(qty);
+      gallery.appendChild(imgDiv);
+    });
+
     /* toggle list */
     const tog = document.createElement("button");
     tog.className="combo-toggle-btn";
@@ -207,7 +229,7 @@ function renderCombos(){
     addBtn.textContent="➕ Agregar al combo";
     addBtn.addEventListener("click",()=>addCombo(combo.id,addBtn));
 
-    body.append(nm,ds,pr,tog,panel,addBtn);
+    body.append(nm,ds,pr,gallery,tog,panel,addBtn);
     card.appendChild(body);
     grid.appendChild(card);
   });
